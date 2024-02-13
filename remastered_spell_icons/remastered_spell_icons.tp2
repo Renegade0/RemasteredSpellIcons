@@ -1,0 +1,92 @@
+BACKUP ~remastered_spell_icons/backup~
+AUTHOR ~Pecca~
+VERSION ~v1.0~
+
+LANGUAGE
+	~English~ ~remastered_spell_icons/tra~ ~remastered_spell_icons/tra/english.tra~
+
+
+/////////////////////////////////////////////////////////////////////////////////
+///  CORE COMPONENT
+/////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @1000
+
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @1005
+
+COPY ~remastered_spell_icons/content/base~ ~override~
+
+ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+	COPY ~remastered_spell_icons/content/green~ ~override~
+	COPY ~remastered_spell_icons/content/iwd~ ~override~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME "rgwssp5h.bam" BEGIN //msfm
+	COPY ~remastered_spell_icons/content/mods/msfm/base~ ~override~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME "rgspheal.spl"  BEGIN //spontaneous casting 
+	COPY ~remastered_spell_icons/content/mods/spontaneous_casting/base~ ~override~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME "rgdscrl1.bam" BEGIN //infinity ui
+	COPY ~remastered_spell_icons/content/mods/infinity_ui~ ~override~
+END ELSE BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME "rgpscrl.bam" BEGIN //pocket play ui
+	// Do nothing
+END ELSE BEGIN //vanilla ui
+
+COPY_EXISTING ~UI.MENU~ ~override~
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+~"bookSpells[rowNumber].icon"~ ~"bookSpells[rowNumber].icon" area 0 0 40 40 scaleToClip text~
+
+COPY_EXISTING ~UI.MENU~ ~override~
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+~"bottomSpells[rowNumber].icon"~ ~"bottomSpells[rowNumber].icon" scaleToClip text~
+
+COPY_EXISTING ~UI.MENU~ ~override~
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+~"preparedSpells[rowNumber].spells[1].icon"~ ~"preparedSpells[rowNumber].spells[1].icon" scaleToClip text~
+
+COPY_EXISTING ~UI.MENU~ ~override~
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+~"preparedSpells[rowNumber].spells[2].icon"~ ~"preparedSpells[rowNumber].spells[2].icon" scaleToClip text~
+
+COPY_EXISTING ~UI.MENU~ ~override~
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+~"preparedSpells[rowNumber].spells[3].icon"~ ~"preparedSpells[rowNumber].spells[3.icon" scaleToClip text~
+
+COPY_EXISTING ~UI.MENU~ ~override~
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+~"PopupDetails.icon"~ ~"PopupDetails.icon" scaleToClip text~
+
+COPY_EXISTING ~UI.MENU~ ~override~
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+~"characters[id].priestSpells[currentSpellLevel][rowNumber].icon"~ ~"characters[id].priestSpells[currentSpellLevel][rowNumber].icon" area 0 0 40 40 scaleToClip text~
+
+COPY_EXISTING ~UI.MENU~ ~override~
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+~"spellBook[chargen.currentSpellLevelChoice][chargen.choose_spell[rowNumber].key].groundicon"~ ~"spellBook[chargen.currentSpellLevelChoice][chargen.choose_spell[rowNumber].key].groundicon" scaleToClip text~
+
+END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////////
+///  GREEN SUMMONING ICONS
+/////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @1001
+
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @1005
+
+COPY ~remastered_spell_icons/content/green~ ~override~
+
+ACTION_IF (MOD_IS_INSTALLED ~msfm.tp2~ 0) BEGIN
+	COPY ~remastered_spell_icons/content/mods/msfm/green~ ~override~
+END
+
+ACTION_IF (MOD_IS_INSTALLED ~Spontaneous_Casting.tp2~ 0) BEGIN
+	COPY ~remastered_spell_icons/content/mods/spontaneous_casting/green~ ~override~
+END
+
