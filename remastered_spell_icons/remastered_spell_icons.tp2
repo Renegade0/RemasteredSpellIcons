@@ -22,7 +22,7 @@ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 END
 
 ACTION_IF FILE_EXISTS_IN_GAME "rgwssp5h.bam" BEGIN //msfm
-	COPY ~remastered_spell_icons/content/mods/msfm/base~ ~override~
+	COPY ~remastered_spell_icons/content/mods/msfm~ ~override~
 END
 
 ACTION_IF FILE_EXISTS_IN_GAME "rgspheal.spl"  BEGIN //spontaneous casting 
