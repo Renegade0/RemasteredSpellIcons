@@ -36,13 +36,31 @@ ACTION_IF FILE_EXISTS_IN_GAME "rgpscrl.bam" BEGIN //pocket play ui
 	// Do nothing
 END ELSE BEGIN //vanilla ui
 
-COPY_EXISTING ~UI.MENU~ ~override~
-REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
-~"bookSpells[rowNumber].icon"~ ~"bookSpells[rowNumber].icon" area 0 0 40 40 scaleToClip text~
+ACTION_IF (MOD_IS_INSTALLED ~LeUI.tp2~ ~0~ OR MOD_IS_INSTALLED ~LeUI-BG1EE.tp2~ ~0~ OR MOD_IS_INSTALLED ~LeUI-SoD.tp2~ ~0~) BEGIN
+	COPY_EXISTING ~UI.MENU~ ~override~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP
+	~"bookSpells\[\(.*\)\]\.icon"~ ~"bookSpells[\1].icon" area 10 10 42 42 scaleToClip~
 
-COPY_EXISTING ~UI.MENU~ ~override~
-REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
-~"bottomSpells[rowNumber].icon"~ ~"bottomSpells[rowNumber].icon" scaleToClip text~
+	COPY_EXISTING ~UI.MENU~ ~override~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP
+	~"bottomSpells\[\(.*\)\]\.icon"~ ~"bottomSpells[\1].icon" area 10 10 42 42 scaleToClip~
+
+	COPY_EXISTING ~UI.MENU~ ~override~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP
+	~"characters\[id\]\.priestSpells\[currentSpellLevel\]\[\(.*\)\]\.icon"~ ~"characters[id].priestSpells[currentSpellLevel][\1].icon" area 10 10 42 42 scaleToClip~
+END ELSE BEGIN
+	COPY_EXISTING ~UI.MENU~ ~override~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+	~"bookSpells[rowNumber].icon"~ ~"bookSpells[rowNumber].icon" area 0 0 40 40 scaleToClip text~
+
+	COPY_EXISTING ~UI.MENU~ ~override~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+	~"bottomSpells[rowNumber].icon"~ ~"bottomSpells[rowNumber].icon" scaleToClip text~
+
+	COPY_EXISTING ~UI.MENU~ ~override~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+	~"characters[id].priestSpells[currentSpellLevel][rowNumber].icon"~ ~"characters[id].priestSpells[currentSpellLevel][rowNumber].icon" area 0 0 40 40 scaleToClip text~
+END
 
 COPY_EXISTING ~UI.MENU~ ~override~
 REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
@@ -59,10 +77,6 @@ REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
 COPY_EXISTING ~UI.MENU~ ~override~
 REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
 ~"PopupDetails.icon"~ ~"PopupDetails.icon" scaleToClip text~
-
-COPY_EXISTING ~UI.MENU~ ~override~
-REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
-~"characters[id].priestSpells[currentSpellLevel][rowNumber].icon"~ ~"characters[id].priestSpells[currentSpellLevel][rowNumber].icon" area 0 0 40 40 scaleToClip text~
 
 COPY_EXISTING ~UI.MENU~ ~override~
 REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
